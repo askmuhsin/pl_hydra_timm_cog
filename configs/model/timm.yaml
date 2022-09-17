@@ -1,0 +1,11 @@
+_target_: src.models.timm_module.TimmModel
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.001
+  weight_decay: 0.0
+
+net:
+  _target_: src.models.components.timm_net_base.TimmModel
+  model_name: 'mobilenetv2_140'
