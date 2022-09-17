@@ -41,6 +41,8 @@ from omegaconf import DictConfig
 from pytorch_lightning import Callback, LightningDataModule, LightningModule, Trainer
 from pytorch_lightning.loggers import LightningLoggerBase
 
+from timm.data.transforms_factory import create_transform
+
 from src import utils
 
 log = utils.get_pylogger(__name__)
@@ -70,6 +72,11 @@ def train(cfg: DictConfig) -> Tuple[dict, dict]:
 
     log.info(f"Instantiating model <{cfg.model._target_}>")
     model: LightningModule = hydra.utils.instantiate(cfg.model)
+
+    data_config = model.net.get_data_config()
+    custom_tranform = create_transform(**data_config) ##  custom transforms for the select timm model
+    datamodule.transforms = custom_tranform
+    log.info(f'Applying custom tranforms : {str(data_config)}')
 
     log.info("Instantiating callbacks...")
     callbacks: List[Callback] = utils.instantiate_callbacks(cfg.get("callbacks"))
