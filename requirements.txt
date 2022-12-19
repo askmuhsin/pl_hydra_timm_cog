@@ -3,7 +3,7 @@ torch>=1.10.0
 # https://download.pytorch.org/whl/cpu/torch-1.10.0%2Bcpu-cp39-cp39-linux_x86_64.whl
 torchvision>=0.11.0
 # https://download.pytorch.org/whl/cpu/torchvision-0.11.0%2Bcpu-cp39-cp39-linux_x86_64.whl
-pytorch-lightning==1.7.1
+pytorch-lightning==1.8.5.post0
 timm
 torchmetrics==0.9.3
 
